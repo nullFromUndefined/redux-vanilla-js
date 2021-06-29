@@ -8,13 +8,18 @@ const addBtn = document.getElementById('add');
 const subBtn = document.getElementById('sub');
 const division = document.getElementById('division');
 const inputNumber = document.getElementById('input-number');
+const validityInput = document.getElementById('validity-input');
 
 // создаем глобальный state
 const store = createStore(rootReducer, 'Введи значение в строку))');
 
 input.addEventListener('input', (event) => {
-    store.dispatch(updateData(+event.target.value));
-    console.log('store.getState().counter', store.getState());
+    if (!Number(event.target.value)) {
+        validityInput.innerHTML = 'Введи корректное значение';
+    } else {
+        store.dispatch(updateData(+event.target.value));
+        validityInput.innerHTML = '';
+    }
 })
 
 addBtn.addEventListener('click', () => {
